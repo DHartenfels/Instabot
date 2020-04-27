@@ -1,4 +1,5 @@
 from selenium import webdriver
+from selenium.webdriver.firefox.options import Options
 from selenium.webdriver.common.keys import Keys
 from socket import socket
 import time
@@ -8,9 +9,16 @@ import time
 class InstagramBot:
 
     def __init__(self, username, password):
-        self.username = username
-        self.password = password
-        self.driver = webdriver.Firefox()
+        self.username = "#Your_username_here"
+        self.password = "#Your_password_here"
+        #self.driver = webdriver.Firefox()
+        # fireFoxOptions = webdriver.FirefoxOptions()
+        # fireFoxOptions.set_headless()
+        # self.driver = webdriver.Firefox(firefox_options=fireFoxOptions)
+
+        options = Options()
+        options.headless = True
+        self.driver = webdriver.Firefox(options=options)
 
     print("""
                  
@@ -20,7 +28,6 @@ class InstagramBot:
  | '_ ` _ \| | | | '_ \ / _` | '__/ __| '_  |
  | | | | | | |_| | | | | (_| | | | (__| | | |
  |_| |_| |_|\___/|_| |_|\__,_|_|  \___|_| |_|
-
                                                 """)
 
 
@@ -49,31 +56,37 @@ class InstagramBot:
         driver = self.driver
         driver.get("https://www.instagram.com/explore/tags/" + hashtag + "/")
         time.sleep(2)
-        for i in range(1, 3):
+        for i in range(1, 5):
             driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
             time.sleep(2)
         hrefs = driver.find_elements_by_tag_name("a")
         all_links = []
+        counter = 0
         for link in hrefs:
             all_links.append(link.get_attribute("href"))
 
         # pic_hrefs = [hrefs.get_attribute("href") for elem in hrefs]
-        pic_hrefs = [href for href in all_links if hashtag in href]
+        #pic_hrefs = [href for href in all_links if hashtag in href]
         # print(hashtag + 'hat' +  str(len(all_links) + 'Fotos zum Liken'))
-        all_links = all_links[:-14]
+        all_links = all_links[9:-14]
         # print(all_links)
         # print(pic_hrefs)
+        counter = 0
         for pic_href in all_links:
             driver.get(pic_href)
             driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
             try:
-                driver.find_element_by_xpath("//button/span").click()
+                #driver.find_element_by_xpath("/html/body/div[4]/div[2]/div/article/div[2]/section[1]/span[1]/button").click()
+                driver.find_element_by_class_name("wpO6b").click()
                 print('Liked ' + pic_href + ' !')
                 time.sleep(12)
             except Exception as e:
                 time.sleep(2)
                 print('notliked')
-
-DNS = InstagramBot("digitalnativesquad", "Siedler1208")
+                print(e)
+            counter +=1
+            if counter == len(all_links):
+                print("DONE")
+DNS = InstagramBot("username","password")
 DNS.login()
 DNS.like_photo(input("Welcher Hashtag? "))
