@@ -1,0 +1,39 @@
+{
+  "db": {
+    "host": "35.240.62.24",
+    "user": "Dennis",
+    "pass": "Siedler1208",
+    "database": "instabot_table"
+  },
+  "instagram": {
+    "user":"user",
+    "pass":"pass"
+  },
+  "config": {
+    "days_to_unfollow": 1,
+    "likes_over": 150,
+    "check_followers_every": 3600,
+    "hashtags": [
+      "feminismus",
+      "antifeminismus",
+      "martapress",
+      "independentverlag",
+      "femizid",
+      "queer",
+      "lgptq+",
+      "lgbtqplus",
+      "frauenrechte",
+      "gleichberechtigung",
+      "genderpaygap",
+      "lgbt",
+      "gaycommunity",
+      "alternativekinderbücher",
+      "sexismus",
+      "feminism",
+      "traumatabewältigung",
+      "geschlechtsnormen",
+      "geschlechternormen",
+      "bücher"
+    ]
+  }
+}
